@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Lightworkers Oracle</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+text-align:center;
+padding:40px;
+background:linear-gradient(180deg,#f5efe6,#e8dfd4,#d9cfc3);
+color:#3a342f;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.deck{
+position:relative;
+width:220px;
+height:320px;
+margin:60px auto;
+}
+
+.card{
+width:160px;
+height:240px;
+position:absolute;
+left:0;
+right:0;
+margin:auto;
+perspective:1000px;
+cursor:pointer;
+}
+
+.inner{
+position:relative;
+width:100%;
+height:100%;
+transform-style:preserve-3d;
+transition:transform 0.7s;
+}
+
+.flipped{
+transform:rotateY(180deg);
+}
+
+.front,.back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:12px;
+background-size:cover;
+background-position:center;
+box-shadow:0 6px 20px rgba(0,0,0,0.25);
+}
+
+.front{
+transform:rotateY(180deg);
+}
+
+#reading{
+margin-top:60px;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+text-align:left;
+line-height:1.8;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.section{
+margin-top:15px;
+}
+
+.section-title{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🔮 The Lightworkers Oracle</h1>
+<p>Take a deep breath and choose the card you feel drawn to.</p>
+
+<div class="deck" id="deck"></div>
+
+<div id="reading"></div>
+
+<script>
+
+const backImage="images/back.png"
+
+const cards=[
+
+{
+image:"images/rites-of-passage.png",
+title:"Rites of Passage",
+affirmation:"I move through life as though I am being initiated",
+message:`Rites of Passage is the card that comes forward when you find yourself moving through a portal. We often visualise portals to be energetic but as we grow and evolve in our journey of life, we move through multiple initiations that lead us to the next part of our journey.
+
+As humans we often look for absolution in everything that we encounter. We look at life and death as finite when it is anything but that. Rites of Passage is your permission slip to look at the multiple ways life is redirecting you. Life is opening up a petalled doorway for you to step into the next version of you.
+
+Some of the rites of passage that you may encounter in your life are death of your old self and dissolving parts of you that you no longer resonate with, which leads to rebirth. But even then we are constantly shapeshifting into new versions of ourselves.
+
+A woman’s journey goes through multiple rites of passage starting from the maiden moving on to the mother and then stepping into the crone.
+
+Rites of Passage reminds you that this is not the end but a new beginning. Don’t cling to what you have outgrown. Allow closure so you can release karmic ties and grow with grace.`,
+activation:"Ho raa shee ne yti u sha"
+},
+
+{
+image:"images/multidimensionality.png",
+title:"Multidimensionality",
+affirmation:"I choose to anchor my light from different directions into the heart of Gaia",
+message:`A multidimensional being holds the energies of infinite timelines. Imagine standing in a room of mirrors and seeing endless versions of yourself.
+
+Similarly, you are a multidimensional soul carrying gifts beyond this lifetime.
+
+If this card appears, a soul gift from another timeline may be activating.
+
+Ground yourself so these gifts can anchor into your present reality.`,
+activation:"Ey ra ee se ho na hee se"
+},
+
+{
+image:"images/spirit-allies.png",
+title:"Spirit Allies",
+affirmation:"I allow the tools I use to guide me ahead on this journey",
+message:`If you feel drawn to spiritual tools, it is because you have a natural connection to them.
+
+Crystals, oracle cards, herbs and divination systems are allies that support your intuition.
+
+You are a wisdom keeper who carries ancient remembrance.
+
+Use these tools for guidance but remember that the true power lies within you.`,
+activation:"hurr ha rey so ne hurr sho ya kay"
+},
+
+{
+image:"images/pleasure-path.png",
+title:"Pleasure Path",
+affirmation:"I allow myself to open up and receive pleasure",
+message:`The Pleasure Path invites you to slow down and experience the beauty of the present moment.
+
+Modern life often disconnects us from the joy of simple sensory experiences.
+
+Allow yourself to feel, taste, smell and experience life fully.
+
+Your sensuality and creativity are sacred aspects of your spiritual journey.`,
+activation:"Aa se niiii reyyy ho to ke ma"
+},
+
+{
+image:"images/frequency-keeper.png",
+title:"Frequency Keeper",
+affirmation:"I am a portal for transmuting frequencies",
+message:`You have the ability to sense and shift energy in spaces and relationships.
+
+Your sensitivity is a gift that allows you to transmute lower vibrations into higher ones.
+
+Protect your energy and speak your truth.
+
+Your voice and presence are powerful tools for transformation.`,
+activation:"Aa lah re sheee no ya ke ri yah"
+},
+
+{
+image:"images/sangha.png",
+title:"Sangha",
+affirmation:"I am calling forward my Sangha who are here to walk this path with me",
+message:`Sangha represents your soul family and spiritual community.
+
+You are not meant to walk this path alone.
+
+The right people will appear in your life at the right time to support your growth.
+
+Trust the connections that feel aligned with your soul.`,
+activation:"Sho ray hay sto ni ko yi pa yaaal"
+},
+
+{
+image:"images/deep-sleep.png",
+title:"Deep Sleep",
+affirmation:"I embrace this season of rest",
+message:`Deep Sleep represents a sacred pause in your life.
+
+Just like seasons, your soul moves through cycles of activity and rest.
+
+This is a time to integrate your experiences and allow things to unfold naturally.
+
+Trust that everything is aligning behind the scenes.`,
+activation:"She she ni ye ki she ri hey"
+},
+
+{
+image:"images/orange-flame.png",
+title:"Orange Flame",
+affirmation:"I rise out of the ashes that once buried me",
+message:`The Orange Flame represents cleansing and rebirth.
+
+You may be releasing old energies or patterns that no longer serve you.
+
+This clearing process prepares you for a powerful transformation.
+
+Allow the flame to burn away what is no longer aligned.`,
+activation:"Shay ya ho ne do ya he ka ji ho"
+},
+
+{
+image:"images/the-artist.png",
+title:"The Artist",
+affirmation:"I am a creative intuitive who is here to spread their art into the world",
+message:`The Artist expresses truth through creativity.
+
+Your art may appear in many forms: writing, design, innovation, leadership or ideas.
+
+Release the need for perfection and allow your unique expression to flow freely.
+
+Your creativity is a sacred gift.`,
+activation:"Ho hum ke ya tu re um te syha"
+},
+
+{
+image:"images/system-disruptor.png",
+title:"The System Disruptor",
+affirmation:"I am here to create my own path",
+message:`The System Disruptor challenges outdated structures.
+
+You may feel different from others because you are meant to create new ways of thinking.
+
+Trust your vision and build the path that aligns with your truth.
+
+You are here to bring new possibilities into the world.`,
+activation:"Ul shi ke ri hu ya ja ni hi kaaash"
+}
+
+]
+
+function shuffle(array){
+for(let i=array.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1))
+[array[i],array[j]]=[array[j],array[i]]
+}
+return array
+}
+
+const deck=document.getElementById("deck")
+const shuffled=shuffle([...cards])
+
+shuffled.forEach((card,index)=>{
+
+const cardDiv=document.createElement("div")
+cardDiv.className="card"
+
+cardDiv.style.top=(index*5)+"px"
+cardDiv.style.transform="rotate("+((Math.random()*10)-5)+"deg)"
+
+cardDiv.innerHTML=`
+<div class="inner">
+<div class="front" style="background-image:url('${card.image}')"></div>
+<div class="back" style="background-image:url('${backImage}')"></div>
+</div>
+`
+
+cardDiv.onclick=function(){
+
+document.querySelectorAll(".inner").forEach(c=>c.classList.remove("flipped"))
+cardDiv.querySelector(".inner").classList.add("flipped")
+
+document.getElementById("reading").innerHTML=`
+<h2>${card.title}</h2>
+
+<div class="section">
+<div class="section-title">Affirmation</div>
+${card.affirmation}
+</div>
+
+<div class="section">
+<div class="section-title">Message</div>
+${card.message}
+</div>
+
+<div class="section">
+<div class="section-title">Activation</div>
+${card.activation}
+</div>
+`
+}
+
+deck.appendChild(cardDiv)
+
+})
+
+</script>
+
+</body>
+</html>
