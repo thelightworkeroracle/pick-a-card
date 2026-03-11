@@ -17,71 +17,47 @@ h1{
 margin-bottom:10px;
 }
 
-/* CARD GRID */
-
-.deck{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:25px;
-margin-top:60px;
-}
-
-/* CARD */
-
-.card{
-width:160px;
-height:240px;
-perspective:1000px;
+button{
+margin-top:40px;
+padding:16px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#bcae9d;
+color:white;
 cursor:pointer;
 }
 
-.inner{
-position:relative;
-width:100%;
-height:100%;
-transform-style:preserve-3d;
-transition:transform 0.7s;
+button:hover{
+background:#a59584;
 }
 
-.flipped{
-transform:rotateY(180deg);
-}
-
-.front,.back{
-position:absolute;
-width:100%;
-height:100%;
-backface-visibility:hidden;
-border-radius:12px;
-background-size:cover;
-background-position:center;
-box-shadow:0 6px 20px rgba(0,0,0,0.25);
-}
-
-.front{
-transform:rotateY(180deg);
+#card{
+margin-top:40px;
+width:220px;
+border-radius:14px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 #reading{
-margin-top:60px;
-max-width:900px;
+margin-top:40px;
+max-width:800px;
 margin-left:auto;
 margin-right:auto;
 text-align:left;
-line-height:1.8;
 background:white;
 padding:30px;
 border-radius:12px;
-box-shadow:0 8px 20px rgba(0,0,0,0.1);
+line-height:1.7;
+box-shadow:0 6px 20px rgba(0,0,0,0.1);
 }
 
 .section{
-margin-top:15px;
+margin-top:20px;
 }
 
-.section-title{
-font-weight:bold;
+.section b{
+display:block;
 margin-bottom:5px;
 }
 
@@ -91,151 +67,131 @@ margin-bottom:5px;
 <body>
 
 <h1>🔮 The Lightworkers Oracle</h1>
-<p>Take a deep breath and choose the card you feel drawn to.</p>
+<p>Take a deep breath and draw a card.</p>
 
-<div class="deck" id="deck"></div>
+<button onclick="drawCard()">Draw a Card</button>
+
+<br>
+
+<img id="card" src="https://res.cloudinary.com/dqeukcxav/image/upload/v1773237777/back_nymcit.png">
 
 <div id="reading"></div>
 
 <script>
 
-const backImage="images/back.png"
-
 const cards=[
 
 {
-image:"images/rites-of-passage.png",
 title:"Rites of Passage",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237779/rites-of-passage_ah2ssn.png",
 affirmation:"I move through life as though I am being initiated",
-message:`Rites of Passage is the card that comes forward when you find yourself moving through a portal...`,
+message:`Rites of Passage is the card that comes forward when you find yourself moving through a portal. Life is opening a doorway into the next version of you. Release what you have outgrown and allow yourself to step into this transition with grace.`,
 activation:"Ho raa shee ne yti u sha"
 },
 
 {
-image:"images/multidimensionality.png",
 title:"Multidimensionality",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237777/multidimensionality_ybyugm.png",
 affirmation:"I choose to anchor my light from different directions into the heart of Gaia",
-message:`A multidimensional being is holding the energies of being a master of the multiverse...`,
+message:`You are a multidimensional being holding gifts across many timelines. Ground yourself so your soul gifts can anchor into this lifetime.`,
 activation:"Ey ra ee se ho na hee se"
 },
 
 {
-image:"images/spirit-allies.png",
 title:"Spirit Allies",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237775/spirit-allies_rodsoi.png",
 affirmation:"I allow the tools I use to guide me ahead on this journey",
-message:`If you are drawn to metaphysical tools and esoteric wisdom...`,
+message:`You share a sacred connection with divination tools such as crystals, oracle cards, and astrology. They are allies helping you access deeper wisdom.`,
 activation:"hurr ha rey so ne hurr sho ya kay"
 },
 
 {
-image:"images/pleasure-path.png",
 title:"Pleasure Path",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237777/pleasure-path_m2s0zg.png",
 affirmation:"I allow myself to open up and receive pleasure",
-message:`The Pleasure Path is deeply connected to Divine Feminine energies...`,
+message:`The Pleasure Path invites you to slow down and reconnect with the joy of living. Your body and senses are opening to deeper beauty and softness.`,
 activation:"Aa se niiii reyyy ho to ke ma"
 },
 
 {
-image:"images/frequency-keeper.png",
 title:"Frequency Keeper",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237776/frequency-keeper_ja6xec.png",
 affirmation:"I am a portal for transmuting frequencies",
-message:`The Frequency Keeper carries the codes for altering frequencies...`,
+message:`You carry the ability to sense and shift energies around you. Your sensitivity is not a weakness but a powerful gift.`,
 activation:"Aa lah re sheee no ya ke ri yah"
 },
 
 {
-image:"images/sangha.png",
 title:"Sangha",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237777/sangha_rjix7o.png",
 affirmation:"I am calling forward my Sangha who are here to walk this path with me",
-message:`Sangha refers to soul family or community...`,
+message:`You are not meant to walk this journey alone. Your soul family is aligning with you to support your growth.`,
 activation:"Sho ray hay sto ni ko yi pa yaaal"
 },
 
 {
-image:"images/deep-sleep.png",
 title:"Deep Sleep",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237776/deep-sleep_vzdftc.png",
 affirmation:"I embrace this season of rest",
-message:`Life happens in cycles...`,
+message:`This card represents a sacred pause. The stillness you feel now is preparing you for your next cycle of growth.`,
 activation:"She she ni ye ki she ri hey"
 },
 
 {
-image:"images/orange-flame.png",
 title:"Orange Flame",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237775/orange-flame_gt08qn.png",
 affirmation:"I rise out of the ashes that once buried me",
-message:`Orange Flame is the energy that is used for cleansing...`,
+message:`The Orange Flame cleanses old energy and prepares you for transformation. Release the past so your next chapter can begin.`,
 activation:"Shay ya ho ne do ya he ka ji ho"
 },
 
 {
-image:"images/the-artist.png",
 title:"The Artist",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237776/the-artist_drz0tf.png",
 affirmation:"I am a creative intuitive who is here to spread their art into the world",
-message:`The Artist just is...`,
+message:`Your creativity is a sacred channel. Allow your authentic expression to flow without judgment.`,
 activation:"Ho hum ke ya tu re um te syha"
 },
 
 {
-image:"images/system-disruptor.png",
 title:"The System Disruptor",
+image:"https://res.cloudinary.com/dqeukcxav/image/upload/v1773237776/system-disruptor_lvg3t8.png",
 affirmation:"I am here to create my own path",
-message:`The Divergent stands out...`,
+message:`You are here to challenge outdated systems and birth new ideas that align with the future.`,
 activation:"Ul shi ke ri hu ya ja ni hi kaaash"
 }
 
 ]
 
-function shuffle(array){
-for(let i=array.length-1;i>0;i--){
-const j=Math.floor(Math.random()*(i+1))
-[array[i],array[j]]=[array[j],array[i]]
-}
-return array
-}
+function drawCard(){
 
-const deck=document.getElementById("deck")
-const shuffled=shuffle([...cards])
+const random=Math.floor(Math.random()*cards.length)
+const card=cards[random]
 
-shuffled.forEach((card)=>{
-
-const cardDiv=document.createElement("div")
-cardDiv.className="card"
-
-cardDiv.innerHTML=`
-<div class="inner">
-<div class="front" style="background-image:url('${card.image}')"></div>
-<div class="back" style="background-image:url('${backImage}')"></div>
-</div>
-`
-
-cardDiv.onclick=function(){
-
-document.querySelectorAll(".inner").forEach(c=>c.classList.remove("flipped"))
-cardDiv.querySelector(".inner").classList.add("flipped")
+document.getElementById("card").src=card.image
 
 document.getElementById("reading").innerHTML=`
+
 <h2>${card.title}</h2>
 
 <div class="section">
-<div class="section-title">Affirmation</div>
+<b>Affirmation</b>
 ${card.affirmation}
 </div>
 
 <div class="section">
-<div class="section-title">Message</div>
+<b>Message</b>
 ${card.message}
 </div>
 
 <div class="section">
-<div class="section-title">Activation</div>
+<b>Activation</b>
 ${card.activation}
 </div>
+
 `
+
 }
-
-deck.appendChild(cardDiv)
-
-})
 
 </script>
 
