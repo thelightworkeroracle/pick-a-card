@@ -17,20 +17,21 @@ h1{
 margin-bottom:10px;
 }
 
+/* CARD GRID */
+
 .deck{
-position:relative;
-width:220px;
-height:320px;
-margin:60px auto;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+margin-top:60px;
 }
+
+/* CARD */
 
 .card{
 width:160px;
 height:240px;
-position:absolute;
-left:0;
-right:0;
-margin:auto;
 perspective:1000px;
 cursor:pointer;
 }
@@ -106,15 +107,7 @@ const cards=[
 image:"images/rites-of-passage.png",
 title:"Rites of Passage",
 affirmation:"I move through life as though I am being initiated",
-message:`Rites of Passage is the card that comes forward when you find yourself moving through a portal. We often visualise portals to be energetic but as we grow and evolve in our journey of life, we move through multiple initiations that lead us to the next part of our journey.
-
-As humans we often look for absolution in everything that we encounter. We look at life and death as finite when it is anything but that. Rites of Passage is your permission slip to look at the multiple ways life is redirecting you. Life is opening up a petalled doorway for you to step into the next version of you.
-
-Some of the rites of passage that you may encounter in your life are death of your old self and dissolving parts of you that you no longer resonate with, which leads to rebirth. But even then we are constantly shapeshifting into new versions of ourselves.
-
-A woman’s journey goes through multiple rites of passage starting from the maiden moving on to the mother and then stepping into the crone.
-
-Rites of Passage reminds you that this is not the end but a new beginning. Don’t cling to what you have outgrown. Allow closure so you can release karmic ties and grow with grace.`,
+message:`Rites of Passage is the card that comes forward when you find yourself moving through a portal...`,
 activation:"Ho raa shee ne yti u sha"
 },
 
@@ -122,13 +115,7 @@ activation:"Ho raa shee ne yti u sha"
 image:"images/multidimensionality.png",
 title:"Multidimensionality",
 affirmation:"I choose to anchor my light from different directions into the heart of Gaia",
-message:`A multidimensional being holds the energies of infinite timelines. Imagine standing in a room of mirrors and seeing endless versions of yourself.
-
-Similarly, you are a multidimensional soul carrying gifts beyond this lifetime.
-
-If this card appears, a soul gift from another timeline may be activating.
-
-Ground yourself so these gifts can anchor into your present reality.`,
+message:`A multidimensional being is holding the energies of being a master of the multiverse...`,
 activation:"Ey ra ee se ho na hee se"
 },
 
@@ -136,13 +123,7 @@ activation:"Ey ra ee se ho na hee se"
 image:"images/spirit-allies.png",
 title:"Spirit Allies",
 affirmation:"I allow the tools I use to guide me ahead on this journey",
-message:`If you feel drawn to spiritual tools, it is because you have a natural connection to them.
-
-Crystals, oracle cards, herbs and divination systems are allies that support your intuition.
-
-You are a wisdom keeper who carries ancient remembrance.
-
-Use these tools for guidance but remember that the true power lies within you.`,
+message:`If you are drawn to metaphysical tools and esoteric wisdom...`,
 activation:"hurr ha rey so ne hurr sho ya kay"
 },
 
@@ -150,13 +131,7 @@ activation:"hurr ha rey so ne hurr sho ya kay"
 image:"images/pleasure-path.png",
 title:"Pleasure Path",
 affirmation:"I allow myself to open up and receive pleasure",
-message:`The Pleasure Path invites you to slow down and experience the beauty of the present moment.
-
-Modern life often disconnects us from the joy of simple sensory experiences.
-
-Allow yourself to feel, taste, smell and experience life fully.
-
-Your sensuality and creativity are sacred aspects of your spiritual journey.`,
+message:`The Pleasure Path is deeply connected to Divine Feminine energies...`,
 activation:"Aa se niiii reyyy ho to ke ma"
 },
 
@@ -164,13 +139,7 @@ activation:"Aa se niiii reyyy ho to ke ma"
 image:"images/frequency-keeper.png",
 title:"Frequency Keeper",
 affirmation:"I am a portal for transmuting frequencies",
-message:`You have the ability to sense and shift energy in spaces and relationships.
-
-Your sensitivity is a gift that allows you to transmute lower vibrations into higher ones.
-
-Protect your energy and speak your truth.
-
-Your voice and presence are powerful tools for transformation.`,
+message:`The Frequency Keeper carries the codes for altering frequencies...`,
 activation:"Aa lah re sheee no ya ke ri yah"
 },
 
@@ -178,13 +147,7 @@ activation:"Aa lah re sheee no ya ke ri yah"
 image:"images/sangha.png",
 title:"Sangha",
 affirmation:"I am calling forward my Sangha who are here to walk this path with me",
-message:`Sangha represents your soul family and spiritual community.
-
-You are not meant to walk this path alone.
-
-The right people will appear in your life at the right time to support your growth.
-
-Trust the connections that feel aligned with your soul.`,
+message:`Sangha refers to soul family or community...`,
 activation:"Sho ray hay sto ni ko yi pa yaaal"
 },
 
@@ -192,13 +155,7 @@ activation:"Sho ray hay sto ni ko yi pa yaaal"
 image:"images/deep-sleep.png",
 title:"Deep Sleep",
 affirmation:"I embrace this season of rest",
-message:`Deep Sleep represents a sacred pause in your life.
-
-Just like seasons, your soul moves through cycles of activity and rest.
-
-This is a time to integrate your experiences and allow things to unfold naturally.
-
-Trust that everything is aligning behind the scenes.`,
+message:`Life happens in cycles...`,
 activation:"She she ni ye ki she ri hey"
 },
 
@@ -206,13 +163,7 @@ activation:"She she ni ye ki she ri hey"
 image:"images/orange-flame.png",
 title:"Orange Flame",
 affirmation:"I rise out of the ashes that once buried me",
-message:`The Orange Flame represents cleansing and rebirth.
-
-You may be releasing old energies or patterns that no longer serve you.
-
-This clearing process prepares you for a powerful transformation.
-
-Allow the flame to burn away what is no longer aligned.`,
+message:`Orange Flame is the energy that is used for cleansing...`,
 activation:"Shay ya ho ne do ya he ka ji ho"
 },
 
@@ -220,13 +171,7 @@ activation:"Shay ya ho ne do ya he ka ji ho"
 image:"images/the-artist.png",
 title:"The Artist",
 affirmation:"I am a creative intuitive who is here to spread their art into the world",
-message:`The Artist expresses truth through creativity.
-
-Your art may appear in many forms: writing, design, innovation, leadership or ideas.
-
-Release the need for perfection and allow your unique expression to flow freely.
-
-Your creativity is a sacred gift.`,
+message:`The Artist just is...`,
 activation:"Ho hum ke ya tu re um te syha"
 },
 
@@ -234,13 +179,7 @@ activation:"Ho hum ke ya tu re um te syha"
 image:"images/system-disruptor.png",
 title:"The System Disruptor",
 affirmation:"I am here to create my own path",
-message:`The System Disruptor challenges outdated structures.
-
-You may feel different from others because you are meant to create new ways of thinking.
-
-Trust your vision and build the path that aligns with your truth.
-
-You are here to bring new possibilities into the world.`,
+message:`The Divergent stands out...`,
 activation:"Ul shi ke ri hu ya ja ni hi kaaash"
 }
 
@@ -257,13 +196,10 @@ return array
 const deck=document.getElementById("deck")
 const shuffled=shuffle([...cards])
 
-shuffled.forEach((card,index)=>{
+shuffled.forEach((card)=>{
 
 const cardDiv=document.createElement("div")
 cardDiv.className="card"
-
-cardDiv.style.top=(index*5)+"px"
-cardDiv.style.transform="rotate("+((Math.random()*10)-5)+"deg)"
 
 cardDiv.innerHTML=`
 <div class="inner">
